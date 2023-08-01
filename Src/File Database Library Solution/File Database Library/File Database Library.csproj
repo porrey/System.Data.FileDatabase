@@ -1,11 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>netstandard2.1;net45;net461;netcoreapp3.1</TargetFrameworks>
+		<TargetFrameworks>netstandard2.1;net45;net461;netcoreapp3.1;net6.0-windows;net7.0-windows</TargetFrameworks>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-		<Version>2.0.0</Version>
-		<AssemblyVersion>2.0.0</AssemblyVersion>
+		<Version>2.1.0</Version>
+		<AssemblyVersion>2.1.0</AssemblyVersion>
 		<Authors>Daniel M. Porrey</Authors>
 		<Description>A library for easy access to File based databases such as Microsoft Access, flat files or Excel Spreadsheets.</Description>
 		<Copyright>Copyright © Daniel Porrey 2017-2019</Copyright>
@@ -22,26 +22,27 @@
 	</PropertyGroup>
 
 	<PropertyGroup>
-	  <DocumentationFile>File Database Library.xml</DocumentationFile>
+		<DocumentationFile>File Database Library.xml</DocumentationFile>
+		<FileVersion>2.1.0</FileVersion>
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <None Remove="File Database Library.csproj.vspscc" />
+		<None Remove="File Database Library.csproj.vspscc" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0">
-		  <PrivateAssets>all</PrivateAssets>
-		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="System.DisposableObject" Version="1.3.2" />
+		<PackageReference Include="System.DisposableObject" Version="1.5.1" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Include="FileDatabase.png">
-	    <Pack>True</Pack>
-	    <PackagePath></PackagePath>
-	  </None>
+		<None Include="FileDatabase.png">
+			<Pack>True</Pack>
+			<PackagePath></PackagePath>
+		</None>
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(TargetFramework)' == 'net461'">
@@ -55,11 +56,29 @@
 			<Version>4.5.0</Version>
 		</PackageReference>
 	</ItemGroup>
-	
+
 	<ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp3.1'">
-	  <PackageReference Include="System.Data.OleDb">
-	    <Version>4.7.0</Version>
-	  </PackageReference>
+		<PackageReference Include="System.Data.OleDb">
+			<Version>4.7.0</Version>
+		</PackageReference>
+		<PackageReference Include="System.Data.DataSetExtensions">
+			<Version>4.5.0</Version>
+		</PackageReference>
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)' == 'net6.0-windows'">
+		<PackageReference Include="System.Data.OleDb">
+			<Version>6.0.0</Version>
+		</PackageReference>
+		<PackageReference Include="System.Data.DataSetExtensions">
+			<Version>4.5.0</Version>
+		</PackageReference>
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)' == 'net7.0-windows'">
+		<PackageReference Include="System.Data.OleDb">
+			<Version>7.0.0</Version>
+		</PackageReference>
 		<PackageReference Include="System.Data.DataSetExtensions">
 			<Version>4.5.0</Version>
 		</PackageReference>

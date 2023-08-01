@@ -130,10 +130,10 @@ namespace System.Data.FileDatabase
 		{
 			bool returnValue = false;
 
-			// ***
-			// *** Check if the table exists and create it if it
-			// *** doesn't
-			// ***
+			//
+			// Check if the table exists and create it if it
+			// doesn't
+			//
 			using (OleDbConnection conn = new OleDbConnection(this.ConnectionString))
 			{
 				conn.Open();
@@ -234,9 +234,9 @@ namespace System.Data.FileDatabase
 		{
 			BatchToken returnValue = new BatchToken(this.ConnectionString);
 
-			// ***
-			// *** Open a connection
-			// ***
+			//
+			// Open a connection
+			//
 			OleDbConnection conn = new OleDbConnection(this.ConnectionString);
 			conn.Open();
 			returnValue.Connection = conn;

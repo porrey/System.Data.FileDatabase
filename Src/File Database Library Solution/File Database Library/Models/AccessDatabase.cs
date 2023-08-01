@@ -58,9 +58,9 @@ namespace System.Data.FileDatabase
 		{
 			bool returnValue = false;
 
-			// ***
-			// *** Create an instance of a Jet Replication Object
-			// ***
+			//
+			// Create an instance of a Jet Replication Object
+			//
 			Type objectType = Type.GetTypeFromProgID(this.JetReplicationClass);
 
 			if (objectType != null)
@@ -69,22 +69,22 @@ namespace System.Data.FileDatabase
 
 				string connectionString = String.Format("Provider={0}; Data Source={1}; Jet OLEDB:Engine Type={2}", this.Provider, this.FullPath, ((int)this.JetEngine).ToString());
 
-				// ***
-				// *** Create tan object array for the parameters
-				// ***
+				//
+				// Create tan object array for the parameters
+				//
 				object[] oParams = new object[]
 				{
 					connectionString
 				};
 
-				// ***
-				// *** Create the Access Database by calling the Create method on the COM object.
-				// ***
+				//
+				// Create the Access Database by calling the Create method on the COM object.
+				//
 				_ = comObject.GetType().InvokeMember("Create", BindingFlags.InvokeMethod, null, comObject, oParams);
 
-				// ***
-				// *** Clean up the COM object.
-				// ***
+				//
+				// Clean up the COM object.
+				//
 				Marshal.ReleaseComObject(comObject);
 
 				returnValue = File.Exists(this.FullPath);
@@ -103,25 +103,25 @@ namespace System.Data.FileDatabase
 
 			try
 			{
-				// ***
-				// *** ADOX.Catalog
-				// ***
+				//
+				// ADOX.Catalog
+				//
 				string sourceConnectionString = String.Format("Provider={0}; Data Source={1}; Jet OLEDB:Engine Type={2}", this.Provider, this.FullPath, Convert.ToInt32(this.JetEngine));
 				string tempFile = String.Format("{0}.tmp", this.FullPath);
 				string destinationConnectionString = String.Format("Provider={0}; Data Source={1}; Jet OLEDB:Engine Type={2}", this.Provider, tempFile, Convert.ToInt32(this.JetEngine));
 
-				// ***
-				// *** Create an instance of a Jet Replication Object
-				// ***
+				//
+				// Create an instance of a Jet Replication Object
+				//
 				Type objectType = Type.GetTypeFromProgID("JRO.JetEngine");
 
 				if (objectType != null)
 				{
 					object comObject = Activator.CreateInstance(objectType);
 
-					// ***
-					// *** Create tan object array for the parameters
-					// ***
+					//
+					// Create tan object array for the parameters
+					//
 					object[] oParams = new object[]
 						{
 							sourceConnectionString,
@@ -130,15 +130,15 @@ namespace System.Data.FileDatabase
 
 					object result = comObject.GetType().InvokeMember("CompactDatabase", BindingFlags.InvokeMethod, null, comObject, oParams);
 
-					// ***
-					// *** Clean up
-					// ***
+					//
+					// Clean up
+					//
 					Marshal.ReleaseComObject(comObject);
 					comObject = null;
 
-					// ***
-					// *** Copy the temp file to the original file
-					// ***
+					//
+					// Copy the temp file to the original file
+					//
 					if (File.Exists(tempFile))
 					{
 						File.Delete(this.FullPath);
