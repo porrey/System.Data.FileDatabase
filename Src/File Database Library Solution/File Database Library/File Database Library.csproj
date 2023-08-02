@@ -4,8 +4,8 @@
 		<TargetFrameworks>netstandard2.1;net45;net461;netcoreapp3.1;net6.0-windows;net7.0-windows</TargetFrameworks>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-		<Version>2.1.0</Version>
-		<AssemblyVersion>2.1.0</AssemblyVersion>
+		<Version>2.1.1</Version>
+		<AssemblyVersion>2.1.1</AssemblyVersion>
 		<Authors>Daniel M. Porrey</Authors>
 		<Description>A library for easy access to File based databases such as Microsoft Access, flat files or Excel Spreadsheets.</Description>
 		<Copyright>Copyright © Daniel Porrey 2017-2019</Copyright>

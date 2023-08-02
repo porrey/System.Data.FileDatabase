@@ -22,6 +22,18 @@ namespace System.Data.FileDatabase
 		}
 
 		/// <summary>
+		/// Creates an instance of AccessDatabase with the given
+		/// path.
+		/// </summary>
+		/// <param name="accessDbPath"></param>
+		/// <param name="provider"></param>
+		public AccessDatabase(string accessDbPath, string provider)
+			: base(accessDbPath)
+		{
+			this.Provider = provider;
+		}
+
+		/// <summary>
 		/// Gets sets the default provider for all connections
 		/// unless overridden in a specific instance.
 		/// </summary>

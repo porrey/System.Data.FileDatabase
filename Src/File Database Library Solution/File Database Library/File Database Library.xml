@@ -267,6 +267,14 @@
             </summary>
             <param name="accessDbPath"></param>
         </member>
+        <member name="M:System.Data.FileDatabase.AccessDatabase.#ctor(System.String,System.String)">
+            <summary>
+            Creates an instance of AccessDatabase with the given
+            path.
+            </summary>
+            <param name="accessDbPath"></param>
+            <param name="provider"></param>
+        </member>
         <member name="P:System.Data.FileDatabase.AccessDatabase.DefaultProvider">
             <summary>
             Gets sets the default provider for all connections
