@@ -186,6 +186,11 @@
             Deletes the data source as specified in the FullPath.
             </summary>
         </member>
+        <member name="M:System.Data.FileDatabase.IJetDatabase.Delete">
+            <summary>
+            Deletes the data source as specified in the FullPath.
+            </summary>
+        </member>
         <member name="T:System.Data.FileDatabase.IOleDbContext">
              <summary>
             
@@ -247,6 +252,15 @@
             </summary>
         </member>
         <member name="M:System.Data.FileDatabase.ITransaction.EndTransaction(System.Boolean)">
+            <summary>
+            Completes the transaction and specifies if it was successful or
+            not. Passing a value if true will Commit the transaction while
+            passing false will roll it back.
+            </summary>
+            <param name="success">Specifies if the transaction should be committed (true)
+            or rolled back (false).</param>
+        </member>
+        <member name="M:System.Data.FileDatabase.ITransaction.EndTransactionAsync(System.Boolean)">
             <summary>
             Completes the transaction and specifies if it was successful or
             not. Passing a value if true will Commit the transaction while
@@ -321,7 +335,24 @@
             <returns>An instance of Transaction that can be used to execute
             statements in a single transaction.</returns>
         </member>
+        <member name="M:System.Data.FileDatabase.BatchToken.CreateTransactionAsync(System.Data.IsolationLevel)">
+            <summary>
+            Creates a transaction object that an be used to execute
+            a series of statements in a single transactions. The
+            transaction is ended when Transaction.EndTransaction()
+            is called specify true if successful or false to roll
+            back the transaction.
+            </summary>
+            <param name="isolationLevel">Specifies the transaction locking behavior for the connection.</param>
+            <returns>An instance of Transaction that can be used to execute
+            statements in a single transaction.</returns>
+        </member>
         <member name="M:System.Data.FileDatabase.BatchToken.EndBatch">
+            <summary>
+            Ends the batch by closing the open database connection.
+            </summary>
+        </member>
+        <member name="M:System.Data.FileDatabase.BatchToken.EndBatchAsync">
             <summary>
             Ends the batch by closing the open database connection.
             </summary>
@@ -415,6 +446,16 @@
             Represents the Jet Database Engine 12.0
             </summary>
         </member>
+        <member name="F:System.Data.FileDatabase.JetDatabase.Providers.AccessEngine14">
+            <summary>
+            Represents the Jet Database Engine 14.0
+            </summary>
+        </member>
+        <member name="F:System.Data.FileDatabase.JetDatabase.Providers.AccessEngine15">
+            <summary>
+            Represents the Jet Database Engine 15.0
+            </summary>
+        </member>
         <member name="F:System.Data.FileDatabase.JetDatabase.Providers.AccessEngine16">
             <summary>
             Represents the Jet Database Engine 16.0
@@ -438,6 +479,11 @@
             </summary>
         </member>
         <member name="M:System.Data.FileDatabase.JetDatabase.DeleteAsync">
+            <summary>
+            Deletes the data source as specified in the FullPath.
+            </summary>
+        </member>
+        <member name="M:System.Data.FileDatabase.JetDatabase.Delete">
             <summary>
             Deletes the data source as specified in the FullPath.
             </summary>
@@ -509,6 +555,14 @@
             </summary>
         </member>
         <member name="M:System.Data.FileDatabase.JetDatabase.GetOleDbProvidersAsync">
+            <summary>
+            Gets all available OLE DB providers installed on the
+            current machine. Note this list will vary when running
+            under 32-bit versions of the OS versus 64-bit versions.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:System.Data.FileDatabase.JetDatabase.GetOleDbProviders">
             <summary>
             Gets all available OLE DB providers installed on the
             current machine. Note this list will vary when running
@@ -672,11 +726,30 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:System.Data.FileDatabase.MicrosoftAccessProvider.CheckForAccessProvider(System.String)">
+            <summary>
+            Perform the check for the current provider.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:System.Data.FileDatabase.MicrosoftAccessProvider.ProvidersAsync">
+            <summary>
+            Gets a list of providers installed on the current machine.
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:System.Data.FileDatabase.MicrosoftAccessProvider.Providers">
             <summary>
             Gets a list of providers installed on the current machine.
             </summary>
             <returns></returns>
+        </member>
+        <member name="M:System.Data.FileDatabase.MicrosoftAccessProvider.SetProviderByName(System.String)">
+            <summary>
+            Sets the preferred provider by name. This provider is used by all
+            newly created instances of AccessDatabase.
+            </summary>
+            <param name="providerName">The name of the provider to user.</param>
         </member>
         <member name="M:System.Data.FileDatabase.MicrosoftAccessProvider.SetProviderByNameAsync(System.String)">
             <summary>
@@ -833,6 +906,15 @@
             </summary>
         </member>
         <member name="M:System.Data.FileDatabase.Transaction.EndTransaction(System.Boolean)">
+            <summary>
+            Completes the transaction and specifies if it was successful or
+            not. Passing a value if true will Commit the transaction while
+            passing false will roll it back.
+            </summary>
+            <param name="success">Specifies if the transaction should be committed (true)
+            or rolled back (false).</param>
+        </member>
+        <member name="M:System.Data.FileDatabase.Transaction.EndTransactionAsync(System.Boolean)">
             <summary>
             Completes the transaction and specifies if it was successful or
             not. Passing a value if true will Commit the transaction while

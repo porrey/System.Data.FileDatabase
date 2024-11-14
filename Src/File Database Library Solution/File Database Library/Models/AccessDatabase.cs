@@ -1,14 +1,28 @@
-﻿using System.IO;
+﻿//
+// Copyright(C) 2019-2025, Daniel M. Porrey. All rights reserved.
+// 
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU Lesser General Public License as published
+// by the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU Lesser General Public License for more details.
+// 
+// You should have received a copy of the GNU Lesser General Public License
+// along with this program. If not, see http://www.gnu.org/licenses/.
+// 
 using System.Reflection;
 using System.Runtime.InteropServices;
-using System.Threading.Tasks;
 
 namespace System.Data.FileDatabase
 {
-	/// <summary>
-	/// Provides functionality against an AccessDatabase.
-	/// </summary>
-	public class AccessDatabase : JetDatabase
+    /// <summary>
+    /// Provides functionality against an AccessDatabase.
+    /// </summary>
+    public class AccessDatabase : JetDatabase
 	{
 		/// <summary>
 		/// Creates an instance of AccessDatabase with the given
@@ -81,13 +95,13 @@ namespace System.Data.FileDatabase
 
 				string connectionString = String.Format("Provider={0}; Data Source={1}; Jet OLEDB:Engine Type={2}", this.Provider, this.FullPath, ((int)this.JetEngine).ToString());
 
-				//
-				// Create tan object array for the parameters
-				//
-				object[] oParams = new object[]
-				{
-					connectionString
-				};
+                //
+                // Create tan object array for the parameters
+                //
+                object[] oParams =
+                [
+                    connectionString
+				];
 
 				//
 				// Create the Access Database by calling the Create method on the COM object.
@@ -131,14 +145,14 @@ namespace System.Data.FileDatabase
 				{
 					object comObject = Activator.CreateInstance(objectType);
 
-					//
-					// Create tan object array for the parameters
-					//
-					object[] oParams = new object[]
-						{
-							sourceConnectionString,
-							destinationConnectionString
-						};
+                    //
+                    // Create tan object array for the parameters
+                    //
+                    object[] oParams =
+                    [
+                        sourceConnectionString,
+						destinationConnectionString
+					];
 
 					object result = comObject.GetType().InvokeMember("CompactDatabase", BindingFlags.InvokeMethod, null, comObject, oParams);
 

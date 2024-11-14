@@ -1,19 +1,34 @@
-﻿using System.Data.OleDb;
-using System.Threading.Tasks;
+﻿//
+// Copyright(C) 2019-2025, Daniel M. Porrey. All rights reserved.
+// 
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU Lesser General Public License as published
+// by the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU Lesser General Public License for more details.
+// 
+// You should have received a copy of the GNU Lesser General Public License
+// along with this program. If not, see http://www.gnu.org/licenses/.
+// 
+using System.Data.OleDb;
 
 #pragma warning disable DF0010
 #pragma warning disable DF0021
 
 namespace System.Data.FileDatabase
 {
-	/// <summary>
-	/// Provides a transaction object that an be used to execute
-	/// a series of statements in a single transactions. The
-	/// transaction is ended when Transaction.EndTransaction()
-	/// is called specify true if successful or false to roll
-	/// back the transaction.
-	/// </summary>
-	public class Transaction : DisposableObject, ITransaction
+    /// <summary>
+    /// Provides a transaction object that an be used to execute
+    /// a series of statements in a single transactions. The
+    /// transaction is ended when Transaction.EndTransaction()
+    /// is called specify true if successful or false to roll
+    /// back the transaction.
+    /// </summary>
+    public class Transaction : DisposableObject, ITransaction
 	{
 		internal Transaction(BatchToken token, IsolationLevel isolationLevel)
 		{
@@ -40,9 +55,9 @@ namespace System.Data.FileDatabase
 			{
 				if (this.InternalTransaction.Connection != null)
 				{
-					// ***
-					// *** Force rollback
-					// ***
+					//
+					// Force rollback
+					//
 					this.EndTransaction(false);
 					this.InternalTransaction = null;
 				}
@@ -73,13 +88,34 @@ namespace System.Data.FileDatabase
 			}
 		}
 
-		/// <summary>
-		/// Asynchronously executes a SQL statement against a connection object.
-		/// </summary>
-		/// <param name="sql">Parameterized SQL command to execute.</param>
-		/// <param name="args">SQL parameters passed to the SQL command.</param>
-		/// <returns></returns>
-		public Task<int> ExecuteNonQueryAsync(string sql, params object[] args)
+        /// <summary>
+        /// Completes the transaction and specifies if it was successful or
+        /// not. Passing a value if true will Commit the transaction while
+        /// passing false will roll it back.
+        /// </summary>
+        /// <param name="success">Specifies if the transaction should be committed (true)
+        /// or rolled back (false).</param>
+        public Task EndTransactionAsync(bool success)
+        {
+            if (success)
+            {
+                this.InternalTransaction.Commit();
+            }
+            else
+            {
+                this.InternalTransaction.Rollback();
+            }
+
+			return Task.CompletedTask;
+        }
+
+        /// <summary>
+        /// Asynchronously executes a SQL statement against a connection object.
+        /// </summary>
+        /// <param name="sql">Parameterized SQL command to execute.</param>
+        /// <param name="args">SQL parameters passed to the SQL command.</param>
+        /// <returns></returns>
+        public Task<int> ExecuteNonQueryAsync(string sql, params object[] args)
 		{
 			int returnValue = 0;
 
@@ -87,7 +123,7 @@ namespace System.Data.FileDatabase
 			{
 				lock (this.BatchToken)
 				{
-					using (OleDbCommand cmd = new OleDbCommand(String.Format(sql, args), this.BatchToken.Connection, this.InternalTransaction))
+					using (OleDbCommand cmd = new(String.Format(sql, args), this.BatchToken.Connection, this.InternalTransaction))
 					{
 						returnValue = cmd.ExecuteNonQuery();
 					}
@@ -116,7 +152,7 @@ namespace System.Data.FileDatabase
 			{
 				lock (this.BatchToken)
 				{
-					using (OleDbCommand cmd = new OleDbCommand(String.Format(sql, args), this.BatchToken.Connection, this.InternalTransaction))
+					using (OleDbCommand cmd = new(String.Format(sql, args), this.BatchToken.Connection, this.InternalTransaction))
 					{
 						returnValue = cmd.ExecuteScalar();
 					}
@@ -182,7 +218,7 @@ namespace System.Data.FileDatabase
 		{
 			OleDbDataReader returnValue = null;
 
-			OleDbCommand cmd = new OleDbCommand(String.Format(sql, args), this.BatchToken.Connection, this.InternalTransaction);
+			OleDbCommand cmd = new(String.Format(sql, args), this.BatchToken.Connection, this.InternalTransaction);
 			returnValue = cmd.ExecuteReader();
 
 			return Task.FromResult(returnValue);
@@ -198,9 +234,9 @@ namespace System.Data.FileDatabase
 		{
 			IDataSetResult returnValue = new DataSetResult();
 
-			using (OleDbCommand cmd = new OleDbCommand(String.Format(sql, args), this.BatchToken.Connection, this.InternalTransaction))
+			using (OleDbCommand cmd = new(String.Format(sql, args), this.BatchToken.Connection, this.InternalTransaction))
 			{
-				using (OleDbDataAdapter adp = new OleDbDataAdapter(cmd))
+				using (OleDbDataAdapter adp = new(cmd))
 				{
 					returnValue.Affected = adp.Fill(returnValue.Data);
 				}

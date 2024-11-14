@@ -1,17 +1,32 @@
-﻿using System.Data.OleDb;
-using System.Threading.Tasks;
+﻿//
+// Copyright(C) 2019-2025, Daniel M. Porrey. All rights reserved.
+// 
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU Lesser General Public License as published
+// by the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU Lesser General Public License for more details.
+// 
+// You should have received a copy of the GNU Lesser General Public License
+// along with this program. If not, see http://www.gnu.org/licenses/.
+// 
+using System.Data.OleDb;
 
 #pragma warning disable DF0010
 
 namespace System.Data.FileDatabase
 {
-	/// <summary>
-	///
-	/// </summary>
-	public abstract class OleDbContext : DisposableObject, IOleDbContext
+    /// <summary>
+    ///
+    /// </summary>
+    public abstract class OleDbContext : DisposableObject, IOleDbContext
 	{
 		private OleDbConnection _connection = null;
-		private readonly object _lockObject = new object();
+		private readonly object _lockObject = new();
 
 		internal OleDbContext(string connectionString, bool keepConnectionActive)
 		{
@@ -28,26 +43,26 @@ namespace System.Data.FileDatabase
 			{
 				OleDbConnection returnValue = null;
 
-				// ***
-				// *** Check for a connection String.
-				// ***
+				//
+				// Check for a connection String.
+				//
 				if (!String.IsNullOrEmpty(this.ConnectionString))
 				{
-					// ***
-					// *** If the KeepConnectionActive is true, then open
-					// *** a connection to the database and leave it open.
-					// ***
+					//
+					// If the KeepConnectionActive is true, then open
+					// a connection to the database and leave it open.
+					//
 					if (this.KeepConnectionActive)
 					{
-						// ***
-						// *** Check if the connection has been created yet.
-						// ***
+						//
+						// Check if the connection has been created yet.
+						//
 						if (_connection == null)
 						{
-							// ***
-							// *** Create the connection.
-							// ***
-							_connection = new OleDbConnection(this.ConnectionString);
+							//
+							// Create the connection.
+							//
+							_connection = new(this.ConnectionString);
 							_connection.Open();
 						}
 
@@ -55,10 +70,10 @@ namespace System.Data.FileDatabase
 					}
 					else
 					{
-						// ***
-						// *** Create a new connection every time.
-						// ***
-						returnValue = new OleDbConnection(this.ConnectionString);
+						//
+						// Create a new connection every time.
+						//
+						returnValue = new(this.ConnectionString);
 						returnValue.Open();
 					}
 				}
@@ -113,7 +128,7 @@ namespace System.Data.FileDatabase
 
 				try
 				{
-					using (OleDbCommand cmd = new OleDbCommand(String.Format(sql, args), connection))
+					using (OleDbCommand cmd = new(String.Format(sql, args), connection))
 					{
 						returnValue = cmd.ExecuteNonQuery();
 					}
@@ -144,7 +159,7 @@ namespace System.Data.FileDatabase
 
 				try
 				{
-					using (OleDbCommand cmd = new OleDbCommand(String.Format(sql, args), connection))
+					using (OleDbCommand cmd = new(String.Format(sql, args), connection))
 					{
 						returnValue = cmd.ExecuteScalar();
 					}
@@ -189,7 +204,7 @@ namespace System.Data.FileDatabase
 		/// <returns></returns>
 		public virtual async Task<T> ExecuteConvertScalarAsync<T>(string sql, params object[] args)
 		{
-			T returnValue = default(T);
+			T returnValue = default;
 
 			object result = await this.ExecuteScalarAsync(String.Format(sql, args));
 
@@ -217,7 +232,7 @@ namespace System.Data.FileDatabase
 
 				try
 				{
-					using (OleDbDataAdapter adp = new OleDbDataAdapter(String.Format(sql, args), connection))
+					using (OleDbDataAdapter adp = new(String.Format(sql, args), connection))
 					{
 						returnValue.Affected = adp.Fill(returnValue.Data);
 					}
@@ -240,10 +255,10 @@ namespace System.Data.FileDatabase
 		/// <returns></returns>
 		public virtual Task<OleDbDataReader> ExecuteReaderAsync(string sql, params object[] args)
 		{
-			OleDbDataReader returnValue = null;
+            OleDbDataReader returnValue = null;
 
-			OleDbCommand cmd = new OleDbCommand(String.Format(sql, args), this.Connection);
-			returnValue = cmd.ExecuteReader();
+			OleDbCommand cmd = new(String.Format(sql, args), this.Connection);
+            Task.FromResult(cmd.ExecuteReader());
 
 			return Task.FromResult(returnValue);
 		}
