@@ -1,0 +1,978 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>File Database Library</name>
+    </assembly>
+    <members>
+        <member name="T:System.Data.FileDatabase.ConnectionStringNotSetException">
+            <summary>
+            Thrown when a connection attempt is made but the connection
+            string has not been set.
+            </summary>
+        </member>
+        <member name="M:System.Data.FileDatabase.ConnectionStringNotSetException.#ctor">
+            <summary>
+            Creates default instance of ConnectionStringNotSetException.
+            </summary>
+        </member>
+        <member name="T:System.Data.FileDatabase.ProviderNotFoundException">
+            <summary>
+            Thrown when the an Access Database engine provider
+            cannot be found on the system.
+            </summary>
+        </member>
+        <member name="M:System.Data.FileDatabase.ProviderNotFoundException.#ctor">
+            <summary>
+            Creates default instance of ProviderNotFoundException.
+            </summary>
+        </member>
+        <member name="T:System.Data.FileDatabase.SpecifiedProviderNotFoundException">
+            <summary>
+            Thrown when the an Access Database engine provider
+            cannot be found on the system.
+            </summary>
+        </member>
+        <member name="M:System.Data.FileDatabase.SpecifiedProviderNotFoundException.#ctor(System.String)">
+            <summary>
+            Creates default instance of ProviderNotFoundException.
+            </summary>
+        </member>
+        <member name="T:System.Data.FileDatabase.ICachedQueries">
+            <summary>
+            Defines an interface for an object that can hold
+            cached DataSet queries.
+            </summary>
+        </member>
+        <member name="P:System.Data.FileDatabase.ICachedQueries.CachedQueries">
+            <summary>
+            Gets the cache of queries as a Dictionary with string based key and
+            corresponding DataSet object.
+            </summary>
+        </member>
+        <member name="M:System.Data.FileDatabase.ICachedQueries.CreateCachedQueryAsync(System.String,System.String)">
+            <summary>
+            Creates a cached query with the given key and SQL statement.
+            </summary>
+            <param name="key">The unique key for the query.</param>
+            <param name="sql">A SQL statement that will generate the DataSet.</param>
+            <returns>The number of rows affected by the query.</returns>
+        </member>
+        <member name="P:System.Data.FileDatabase.ICachedQueries.Item(System.String)">
+            <summary>
+            Gets a cached query by specifying the key.
+            </summary>
+            <param name="key">The unique key for the query.</param>
+            <returns>The DataSet of the cached query.</returns>
+        </member>
+        <member name="T:System.Data.FileDatabase.ICommand">
+            <summary>
+            Defines a command interface for a database connection.
+            </summary>
+        </member>
+        <member name="M:System.Data.FileDatabase.ICommand.ExecuteNonQueryAsync(System.String,System.Object[])">
+             <summary>
+            
+             </summary>
+             <param name="sql"></param>
+             <param name="args"></param>
+             <returns></returns>
+        </member>
+        <member name="M:System.Data.FileDatabase.ICommand.ExecuteScalarAsync(System.String,System.Object[])">
+             <summary>
+            
+             </summary>
+             <param name="sql"></param>
+             <param name="args"></param>
+             <returns></returns>
+        </member>
+        <member name="M:System.Data.FileDatabase.ICommand.ExecuteScalarAsync``1(System.String,System.Object[])">
+             <summary>
+            
+             </summary>
+             <typeparam name="T"></typeparam>
+             <param name="sql"></param>
+             <param name="args"></param>
+             <returns></returns>
+        </member>
+        <member name="M:System.Data.FileDatabase.ICommand.ExecuteConvertScalarAsync``1(System.String,System.Object[])">
+             <summary>
+            
+             </summary>
+             <typeparam name="T"></typeparam>
+             <param name="sql"></param>
+             <param name="args"></param>
+             <returns></returns>
+        </member>
+        <member name="M:System.Data.FileDatabase.ICommand.ExecuteDataSetAsync(System.String,System.Object[])">
+             <summary>
+            
+             </summary>
+             <param name="sql"></param>
+             <param name="args"></param>
+             <returns></returns>
+        </member>
+        <member name="M:System.Data.FileDatabase.ICommand.ExecuteReaderAsync(System.String,System.Object[])">
+             <summary>
+            
+             </summary>
+             <param name="sql"></param>
+             <param name="args"></param>
+             <returns></returns>
+        </member>
+        <member name="T:System.Data.FileDatabase.IDataSetResult">
+            <summary>
+            Contains the result of a DataSet query.
+            </summary>
+        </member>
+        <member name="P:System.Data.FileDatabase.IDataSetResult.Affected">
+            <summary>
+            Gets the number of records returned by the query.
+            </summary>
+        </member>
+        <member name="P:System.Data.FileDatabase.IDataSetResult.Data">
+            <summary>
+            Gets the resulting DataSet from the query.
+            </summary>
+        </member>
+        <member name="M:System.Data.FileDatabase.IDataSetResult.Deconstruct(System.Int32@,System.Data.DataSet@)">
+            <summary>
+            De-constructs the object for use with Tuples.
+            </summary>
+            <param name="affected">Gets the number of records returned by the query.</param>
+            <param name="data">Gets the resulting DataSet from the query.</param>
+        </member>
+        <member name="T:System.Data.FileDatabase.IJetDatabase">
+            <summary>
+            Base functionality for Jet Engine based data sources.
+            </summary>
+        </member>
+        <member name="P:System.Data.FileDatabase.IJetDatabase.Exists">
+            <summary>
+            Checks if the data source specified in FullPath exists or not.
+            </summary>
+        </member>
+        <member name="P:System.Data.FileDatabase.IJetDatabase.FullPath">
+            <summary>
+            Gets/sets the full path to the data source.
+            </summary>
+        </member>
+        <member name="P:System.Data.FileDatabase.IJetDatabase.JetEngine">
+            <summary>
+            Gets/sets the Jet Engine type required when using the COM based object
+            and methods. This is not required for standard SQL commands.
+            </summary>
+        </member>
+        <member name="P:System.Data.FileDatabase.IJetDatabase.Provider">
+            <summary>
+            Gets/sets the provider string used in the connection String.
+            </summary>
+        </member>
+        <member name="P:System.Data.FileDatabase.IJetDatabase.ConnectionString">
+            <summary>
+            Gets/sets the specific connection string used to connect
+            to the data source in the underlying provider.
+            </summary>
+        </member>
+        <member name="M:System.Data.FileDatabase.IJetDatabase.ContainsTable(System.String)">
+            <summary>
+            Checks if the table exists in the underlying data structure. Table
+            implementation may vary by provider.
+            </summary>
+            <param name="tableName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:System.Data.FileDatabase.IJetDatabase.DeleteAsync">
+            <summary>
+            Deletes the data source as specified in the FullPath.
+            </summary>
+        </member>
+        <member name="M:System.Data.FileDatabase.IJetDatabase.Delete">
+            <summary>
+            Deletes the data source as specified in the FullPath.
+            </summary>
+        </member>
+        <member name="T:System.Data.FileDatabase.IOleDbContext">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="P:System.Data.FileDatabase.IOleDbContext.Connection">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="P:System.Data.FileDatabase.IOleDbContext.ConnectionString">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="T:System.Data.FileDatabase.IOleDbProvider">
+            <summary>
+            Represents information about an OleDb provider
+            installed on the current system.
+            </summary>
+        </member>
+        <member name="P:System.Data.FileDatabase.IOleDbProvider.Name">
+            <summary>
+            Gets the name of this provider.
+            </summary>
+        </member>
+        <member name="P:System.Data.FileDatabase.IOleDbProvider.Key">
+            <summary>
+            Gets the Unique Key for this provider.
+            </summary>
+        </member>
+        <member name="P:System.Data.FileDatabase.IOleDbProvider.Description">
+            <summary>
+            Gets the description of this provider.
+            </summary>
+        </member>
+        <member name="P:System.Data.FileDatabase.IOleDbProvider.Type">
+            <summary>
+            Gets the type of this provider.
+            </summary>
+        </member>
+        <member name="P:System.Data.FileDatabase.IOleDbProvider.IsParent">
+            <summary>
+            Get a value indicating if this is a parent provider.
+            </summary>
+        </member>
+        <member name="P:System.Data.FileDatabase.IOleDbProvider.ClsId">
+            <summary>
+            Gets the Unique ID for this provider.
+            </summary>
+        </member>
+        <member name="T:System.Data.FileDatabase.ITransaction">
+            <summary>
+            Provides a transaction object that an be used to execute
+            a series of statements in a single transactions. The
+            transaction is ended when Transaction.EndTransaction()
+            is called specify true if successful or false to roll
+            back the transaction.
+            </summary>
+        </member>
+        <member name="M:System.Data.FileDatabase.ITransaction.EndTransaction(System.Boolean)">
+            <summary>
+            Completes the transaction and specifies if it was successful or
+            not. Passing a value if true will Commit the transaction while
+            passing false will roll it back.
+            </summary>
+            <param name="success">Specifies if the transaction should be committed (true)
+            or rolled back (false).</param>
+        </member>
+        <member name="M:System.Data.FileDatabase.ITransaction.EndTransactionAsync(System.Boolean)">
+            <summary>
+            Completes the transaction and specifies if it was successful or
+            not. Passing a value if true will Commit the transaction while
+            passing false will roll it back.
+            </summary>
+            <param name="success">Specifies if the transaction should be committed (true)
+            or rolled back (false).</param>
+        </member>
+        <member name="T:System.Data.FileDatabase.AccessDatabase">
+            <summary>
+            Provides functionality against an AccessDatabase.
+            </summary>
+        </member>
+        <member name="M:System.Data.FileDatabase.AccessDatabase.#ctor(System.String)">
+            <summary>
+            Creates an instance of AccessDatabase with the given
+            path.
+            </summary>
+            <param name="accessDbPath"></param>
+        </member>
+        <member name="M:System.Data.FileDatabase.AccessDatabase.#ctor(System.String,System.String)">
+            <summary>
+            Creates an instance of AccessDatabase with the given
+            path.
+            </summary>
+            <param name="accessDbPath"></param>
+            <param name="provider"></param>
+        </member>
+        <member name="P:System.Data.FileDatabase.AccessDatabase.DefaultProvider">
+            <summary>
+            Gets sets the default provider for all connections
+            unless overridden in a specific instance.
+            </summary>
+        </member>
+        <member name="M:System.Data.FileDatabase.AccessDatabase.OnInitializeConnectionString">
+            <summary>
+            Override the initializer.
+            </summary>
+        </member>
+        <member name="P:System.Data.FileDatabase.AccessDatabase.JetReplicationClass">
+            <summary>
+            Gets/sets the COM class name when using COM based features.
+            </summary>
+        </member>
+        <member name="M:System.Data.FileDatabase.AccessDatabase.CreateEmptyAccessDatabaseAsync">
+            <summary>
+            Creates an empty Access Database. Requires COM objects.
+            </summary>
+            <returns>Returns true if successful; false otherwise.</returns>
+        </member>
+        <member name="M:System.Data.FileDatabase.AccessDatabase.CompactAndRepairAsync">
+            <summary>
+            Compact and repairs the Access database. Requires COM objects.
+            </summary>
+            <returns>Returns true if successful; false otherwise.</returns>
+        </member>
+        <member name="T:System.Data.FileDatabase.BatchToken">
+            <summary>
+            Creates an active connection to a database and leaves that
+            connection open to explicitly calling EndBatch.
+            </summary>
+        </member>
+        <member name="M:System.Data.FileDatabase.BatchToken.CreateTransaction(System.Data.IsolationLevel)">
+            <summary>
+            Creates a transaction object that an be used to execute
+            a series of statements in a single transactions. The
+            transaction is ended when Transaction.EndTransaction()
+            is called specify true if successful or false to roll
+            back the transaction.
+            </summary>
+            <param name="isolationLevel">Specifies the transaction locking behavior for the connection.</param>
+            <returns>An instance of Transaction that can be used to execute
+            statements in a single transaction.</returns>
+        </member>
+        <member name="M:System.Data.FileDatabase.BatchToken.CreateTransactionAsync(System.Data.IsolationLevel)">
+            <summary>
+            Creates a transaction object that an be used to execute
+            a series of statements in a single transactions. The
+            transaction is ended when Transaction.EndTransaction()
+            is called specify true if successful or false to roll
+            back the transaction.
+            </summary>
+            <param name="isolationLevel">Specifies the transaction locking behavior for the connection.</param>
+            <returns>An instance of Transaction that can be used to execute
+            statements in a single transaction.</returns>
+        </member>
+        <member name="M:System.Data.FileDatabase.BatchToken.EndBatch">
+            <summary>
+            Ends the batch by closing the open database connection.
+            </summary>
+        </member>
+        <member name="M:System.Data.FileDatabase.BatchToken.EndBatchAsync">
+            <summary>
+            Ends the batch by closing the open database connection.
+            </summary>
+        </member>
+        <member name="T:System.Data.FileDatabase.DataSetResult">
+            <summary>
+            Contains the result of a DataSet query.
+            </summary>
+        </member>
+        <member name="M:System.Data.FileDatabase.DataSetResult.#ctor">
+            <summary>
+            Creates a default instance of DataSetResult.
+            </summary>
+        </member>
+        <member name="M:System.Data.FileDatabase.DataSetResult.Deconstruct(System.Int32@,System.Data.DataSet@)">
+            <summary>
+            De-constructs the object for use with Tuples.
+            </summary>
+            <param name="affected">Gets the number of records returned by the query.</param>
+            <param name="data">Gets the resulting DataSet from the query.</param>
+        </member>
+        <member name="P:System.Data.FileDatabase.DataSetResult.Affected">
+            <summary>
+            Gets the number of records returned by the query.
+            </summary>
+        </member>
+        <member name="P:System.Data.FileDatabase.DataSetResult.Data">
+            <summary>
+            Gets the resulting DataSet from the query.
+            </summary>
+        </member>
+        <member name="M:System.Data.FileDatabase.DataSetResult.OnDisposeManagedObjects">
+            <summary>
+            Disposes managed objects.
+            </summary>
+        </member>
+        <member name="T:System.Data.FileDatabase.FileDatabase">
+            <summary>
+            Allows direct querying of a text file.
+            </summary>
+        </member>
+        <member name="M:System.Data.FileDatabase.FileDatabase.#ctor(System.String)">
+            <summary>
+            Creates an instance of FileDatabase pointing to the
+            specified folder.
+            </summary>
+            <param name="folderPath">The path where the data files exist.</param>
+        </member>
+        <member name="M:System.Data.FileDatabase.FileDatabase.#ctor(System.String,System.Boolean)">
+            <summary>
+            Creates an instance of FileDatabase pointing to the
+            specified folder and by providing a flag to indicate
+            whether or not the file contains column headers.
+            </summary>
+            <param name="folderPath">The path where the data files exist.</param>
+            <param name="fileHasColumnHeaders">A boolean value indicating whether or not the file contains column headers.</param>
+        </member>
+        <member name="P:System.Data.FileDatabase.FileDatabase.FileHasColumnHeaders">
+            <summary>
+            Gets/sets a value indicating if the file being
+            queried contains column headers or not.
+            </summary>
+        </member>
+        <member name="P:System.Data.FileDatabase.FileDatabase.Format">
+            <summary>
+            Gets/sets the format of the file. The default value is FixLength.
+            </summary>
+        </member>
+        <member name="M:System.Data.FileDatabase.FileDatabase.OnInitializeConnectionString">
+            <summary>
+            Initializes the connection string.
+            </summary>
+        </member>
+        <member name="T:System.Data.FileDatabase.JetDatabase">
+            <summary>
+            Base functionality for Jet Engine based data sources.
+            </summary>
+        </member>
+        <member name="T:System.Data.FileDatabase.JetDatabase.Providers">
+            <summary>
+            Default provider strings that can be used on the Provider property.
+            </summary>
+        </member>
+        <member name="F:System.Data.FileDatabase.JetDatabase.Providers.AccessEngine4">
+            <summary>
+            Represents the Jet Database Engine 4.0
+            </summary>
+        </member>
+        <member name="F:System.Data.FileDatabase.JetDatabase.Providers.AccessEngine12">
+            <summary>
+            Represents the Jet Database Engine 12.0
+            </summary>
+        </member>
+        <member name="F:System.Data.FileDatabase.JetDatabase.Providers.AccessEngine14">
+            <summary>
+            Represents the Jet Database Engine 14.0
+            </summary>
+        </member>
+        <member name="F:System.Data.FileDatabase.JetDatabase.Providers.AccessEngine15">
+            <summary>
+            Represents the Jet Database Engine 15.0
+            </summary>
+        </member>
+        <member name="F:System.Data.FileDatabase.JetDatabase.Providers.AccessEngine16">
+            <summary>
+            Represents the Jet Database Engine 16.0
+            </summary>
+        </member>
+        <member name="M:System.Data.FileDatabase.JetDatabase.#ctor(System.String)">
+            <summary>
+            Creates an instance of a JetDatabase object
+            with the given path.
+            </summary>
+            <param name="filePath"></param>
+        </member>
+        <member name="P:System.Data.FileDatabase.JetDatabase.FullPath">
+            <summary>
+            Gets/sets the full path to the data source.
+            </summary>
+        </member>
+        <member name="P:System.Data.FileDatabase.JetDatabase.Exists">
+            <summary>
+            Checks if the data source specified in FullPath exists or not.
+            </summary>
+        </member>
+        <member name="M:System.Data.FileDatabase.JetDatabase.DeleteAsync">
+            <summary>
+            Deletes the data source as specified in the FullPath.
+            </summary>
+        </member>
+        <member name="M:System.Data.FileDatabase.JetDatabase.Delete">
+            <summary>
+            Deletes the data source as specified in the FullPath.
+            </summary>
+        </member>
+        <member name="P:System.Data.FileDatabase.JetDatabase.Provider">
+            <summary>
+            Gets/sets the provider string used in the connection String.
+            </summary>
+        </member>
+        <member name="P:System.Data.FileDatabase.JetDatabase.JetEngine">
+            <summary>
+            Gets/sets the Jet Engine type required when using the COM based object
+            and methods. This is not required for standard SQL commands.
+            </summary>
+        </member>
+        <member name="M:System.Data.FileDatabase.JetDatabase.ContainsTable(System.String)">
+            <summary>
+            Checks if the table exists in the underlying data structure. Table
+            implementation may vary by provider.
+            </summary>
+            <param name="tableName"></param>
+            <returns></returns>
+        </member>
+        <member name="P:System.Data.FileDatabase.JetDatabase.ConnectionString">
+            <summary>
+            Gets/sets the specific connection string used to connect
+            to the data source in the underlying provider.
+            </summary>
+        </member>
+        <member name="P:System.Data.FileDatabase.JetDatabase.CachedQueries">
+            <summary>
+            Gets the cache of queries as a Dictionary with string based key and
+            corresponding DataSet object.
+            </summary>
+        </member>
+        <member name="M:System.Data.FileDatabase.JetDatabase.CreateCachedQueryAsync(System.String,System.String)">
+            <summary>
+            Creates a cached query with the given key and SQL statement.
+            </summary>
+            <param name="key">The unique key for the query.</param>
+            <param name="sql">A SQL statement that will generate the DataSet.</param>
+            <returns>The number of rows affected by the query.</returns>
+        </member>
+        <member name="P:System.Data.FileDatabase.JetDatabase.Item(System.String)">
+            <summary>
+            Gets a cached query by specifying the key.
+            </summary>
+            <param name="key">The unique key for the query.</param>
+            <returns>The DataSet of the cached query.</returns>
+        </member>
+        <member name="M:System.Data.FileDatabase.JetDatabase.StartBatch">
+            <summary>
+            Starts a batch token used to keep a connection to the
+            data source open for two or more SQL statements. Note these
+            SQL statements are run in a single transaction unless one
+            is specifically created.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:System.Data.FileDatabase.JetDatabase.OnInitializeConnectionString">
+            <summary>
+            Called when the provider connection string is going
+            to be initialized.
+            </summary>
+        </member>
+        <member name="M:System.Data.FileDatabase.JetDatabase.ResetConnectionString">
+            <summary>
+            Resets the connection String.
+            </summary>
+        </member>
+        <member name="M:System.Data.FileDatabase.JetDatabase.GetOleDbProvidersAsync">
+            <summary>
+            Gets all available OLE DB providers installed on the
+            current machine. Note this list will vary when running
+            under 32-bit versions of the OS versus 64-bit versions.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:System.Data.FileDatabase.JetDatabase.GetOleDbProviders">
+            <summary>
+            Gets all available OLE DB providers installed on the
+            current machine. Note this list will vary when running
+            under 32-bit versions of the OS versus 64-bit versions.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:System.Data.FileDatabase.JetEngineType">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="F:System.Data.FileDatabase.JetEngineType.Unknown">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="F:System.Data.FileDatabase.JetEngineType.MicrosoftJet1_0">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="F:System.Data.FileDatabase.JetEngineType.MicrosoftJet1_1">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="F:System.Data.FileDatabase.JetEngineType.MicrosoftJet2_0">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="F:System.Data.FileDatabase.JetEngineType.MicrosoftJet3_x">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="F:System.Data.FileDatabase.JetEngineType.MicrosoftJet4_x">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="F:System.Data.FileDatabase.JetEngineType.MicrosoftJet12_x">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="F:System.Data.FileDatabase.JetEngineType.dBASEIII">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="F:System.Data.FileDatabase.JetEngineType.dBASE4">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="F:System.Data.FileDatabase.JetEngineType.BASE5">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="F:System.Data.FileDatabase.JetEngineType.Excel3_0">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="F:System.Data.FileDatabase.JetEngineType.Excel4_0">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="F:System.Data.FileDatabase.JetEngineType.Excel5_0">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="F:System.Data.FileDatabase.JetEngineType.Excel8_0">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="F:System.Data.FileDatabase.JetEngineType.Excel9_0">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="F:System.Data.FileDatabase.JetEngineType.Exchange4">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="F:System.Data.FileDatabase.JetEngineType.LotusWk1">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="F:System.Data.FileDatabase.JetEngineType.LotusWk3">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="F:System.Data.FileDatabase.JetEngineType.LotusWk4">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="F:System.Data.FileDatabase.JetEngineType.Paradox3_x">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="F:System.Data.FileDatabase.JetEngineType.Paradox4_x">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="F:System.Data.FileDatabase.JetEngineType.Paradox5_x">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="F:System.Data.FileDatabase.JetEngineType.Paradox7_x">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="F:System.Data.FileDatabase.JetEngineType.Text1_x">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="F:System.Data.FileDatabase.JetEngineType.Html1_x">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="T:System.Data.FileDatabase.MicrosoftAccessProvider">
+            <summary>
+            Detects the Installed Access Engine version.
+            </summary>
+        </member>
+        <member name="P:System.Data.FileDatabase.MicrosoftAccessProvider.ProviderFound">
+            <summary>
+            Returns true if the Access Database Engine provider was found.
+            </summary>
+        </member>
+        <member name="P:System.Data.FileDatabase.MicrosoftAccessProvider.Current">
+            <summary>
+            Gets the current IOleDbProvider instance.
+            </summary>
+        </member>
+        <member name="P:System.Data.FileDatabase.MicrosoftAccessProvider.IsPreferred">
+            <summary>
+            Returns true if the preferred provider is the current provider.
+            </summary>
+        </member>
+        <member name="M:System.Data.FileDatabase.MicrosoftAccessProvider.CheckForAccessProviderAsync(System.String)">
+            <summary>
+            Perform the check for the current provider.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:System.Data.FileDatabase.MicrosoftAccessProvider.CheckForAccessProvider(System.String)">
+            <summary>
+            Perform the check for the current provider.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:System.Data.FileDatabase.MicrosoftAccessProvider.ProvidersAsync">
+            <summary>
+            Gets a list of providers installed on the current machine.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:System.Data.FileDatabase.MicrosoftAccessProvider.Providers">
+            <summary>
+            Gets a list of providers installed on the current machine.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:System.Data.FileDatabase.MicrosoftAccessProvider.SetProviderByName(System.String)">
+            <summary>
+            Sets the preferred provider by name. This provider is used by all
+            newly created instances of AccessDatabase.
+            </summary>
+            <param name="providerName">The name of the provider to user.</param>
+        </member>
+        <member name="M:System.Data.FileDatabase.MicrosoftAccessProvider.SetProviderByNameAsync(System.String)">
+            <summary>
+            Sets the preferred provider by name. This provider is used by all
+            newly created instances of AccessDatabase.
+            </summary>
+            <param name="providerName">The name of the provider to user.</param>
+        </member>
+        <member name="T:System.Data.FileDatabase.OleDbContext">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="P:System.Data.FileDatabase.OleDbContext.Connection">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="P:System.Data.FileDatabase.OleDbContext.KeepConnectionActive">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="P:System.Data.FileDatabase.OleDbContext.ConnectionString">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="M:System.Data.FileDatabase.OleDbContext.OnDisposeManagedObjects">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="M:System.Data.FileDatabase.OleDbContext.ExecuteNonQueryAsync(System.String,System.Object[])">
+             <summary>
+            
+             </summary>
+             <param name="sql"></param>
+             <param name="args"></param>
+             <returns></returns>
+        </member>
+        <member name="M:System.Data.FileDatabase.OleDbContext.ExecuteScalarAsync(System.String,System.Object[])">
+             <summary>
+            
+             </summary>
+             <param name="sql"></param>
+             <param name="args"></param>
+             <returns></returns>
+        </member>
+        <member name="M:System.Data.FileDatabase.OleDbContext.ExecuteScalarAsync``1(System.String,System.Object[])">
+             <summary>
+            
+             </summary>
+             <typeparam name="T"></typeparam>
+             <param name="sql"></param>
+             <param name="args"></param>
+             <returns></returns>
+        </member>
+        <member name="M:System.Data.FileDatabase.OleDbContext.ExecuteConvertScalarAsync``1(System.String,System.Object[])">
+             <summary>
+            
+             </summary>
+             <typeparam name="T"></typeparam>
+             <param name="sql"></param>
+             <param name="args"></param>
+             <returns></returns>
+        </member>
+        <member name="M:System.Data.FileDatabase.OleDbContext.ExecuteDataSetAsync(System.String,System.Object[])">
+             <summary>
+            
+             </summary>
+             <param name="sql"></param>
+             <param name="args"></param>
+             <returns></returns>
+        </member>
+        <member name="M:System.Data.FileDatabase.OleDbContext.ExecuteReaderAsync(System.String,System.Object[])">
+             <summary>
+            
+             </summary>
+             <param name="sql"></param>
+             <param name="args"></param>
+             <returns></returns>
+        </member>
+        <member name="M:System.Data.FileDatabase.OleDbContext.ConnectionShutdownAsync(System.Data.OleDb.OleDbConnection)">
+             <summary>
+            
+             </summary>
+             <param name="connection"></param>
+             <returns></returns>
+        </member>
+        <member name="T:System.Data.FileDatabase.OleDbProvider">
+            <summary>
+            Represents information about an OleDb provider
+            installed on the current system.
+            </summary>
+        </member>
+        <member name="P:System.Data.FileDatabase.OleDbProvider.Name">
+            <summary>
+            Gets the name of this provider.
+            </summary>
+        </member>
+        <member name="P:System.Data.FileDatabase.OleDbProvider.Key">
+            <summary>
+            Gets the Unique Key for this provider.
+            </summary>
+        </member>
+        <member name="P:System.Data.FileDatabase.OleDbProvider.Description">
+            <summary>
+            Gets the description of this provider.
+            </summary>
+        </member>
+        <member name="P:System.Data.FileDatabase.OleDbProvider.Type">
+            <summary>
+            Gets the type of this provider.
+            </summary>
+        </member>
+        <member name="P:System.Data.FileDatabase.OleDbProvider.IsParent">
+            <summary>
+            Get a value indicating if this is a parent provider.
+            </summary>
+        </member>
+        <member name="P:System.Data.FileDatabase.OleDbProvider.ClsId">
+            <summary>
+            Gets the Unique ID for this provider.
+            </summary>
+        </member>
+        <member name="M:System.Data.FileDatabase.OleDbProvider.ToString">
+            <summary>
+            Returns a string form of this instance.
+            </summary>
+        </member>
+        <member name="T:System.Data.FileDatabase.Transaction">
+            <summary>
+            Provides a transaction object that an be used to execute
+            a series of statements in a single transactions. The
+            transaction is ended when Transaction.EndTransaction()
+            is called specify true if successful or false to roll
+            back the transaction.
+            </summary>
+        </member>
+        <member name="P:System.Data.FileDatabase.Transaction.BatchToken">
+            <summary>
+            Gets/sets the batch token instance.
+            </summary>
+        </member>
+        <member name="P:System.Data.FileDatabase.Transaction.InternalTransaction">
+            <summary>
+            Gets/sets the internal transaction instance.
+            </summary>
+        </member>
+        <member name="M:System.Data.FileDatabase.Transaction.OnDisposeManagedObjects">
+            <summary>
+            Disposes managed objects.
+            </summary>
+        </member>
+        <member name="M:System.Data.FileDatabase.Transaction.EndTransaction(System.Boolean)">
+            <summary>
+            Completes the transaction and specifies if it was successful or
+            not. Passing a value if true will Commit the transaction while
+            passing false will roll it back.
+            </summary>
+            <param name="success">Specifies if the transaction should be committed (true)
+            or rolled back (false).</param>
+        </member>
+        <member name="M:System.Data.FileDatabase.Transaction.EndTransactionAsync(System.Boolean)">
+            <summary>
+            Completes the transaction and specifies if it was successful or
+            not. Passing a value if true will Commit the transaction while
+            passing false will roll it back.
+            </summary>
+            <param name="success">Specifies if the transaction should be committed (true)
+            or rolled back (false).</param>
+        </member>
+        <member name="M:System.Data.FileDatabase.Transaction.ExecuteNonQueryAsync(System.String,System.Object[])">
+            <summary>
+            Asynchronously executes a SQL statement against a connection object.
+            </summary>
+            <param name="sql">Parameterized SQL command to execute.</param>
+            <param name="args">SQL parameters passed to the SQL command.</param>
+            <returns></returns>
+        </member>
+        <member name="M:System.Data.FileDatabase.Transaction.ExecuteScalarAsync(System.String,System.Object[])">
+            <summary>
+            Executes the query, and returns the first column of the first row in the result
+            set returned by the query. Additional columns or rows are ignored.
+            </summary>
+            <param name="sql">Parameterized SQL command to execute.</param>
+            <param name="args">SQL parameters passed to the SQL command.</param>
+            <returns>Returns the result as an object.</returns>
+        </member>
+        <member name="M:System.Data.FileDatabase.Transaction.ExecuteScalarAsync``1(System.String,System.Object[])">
+            <summary>
+            Executes the query, and returns the first column of the first row in the result
+            set returned by the query. Additional columns or rows are ignored.
+            </summary>
+            <param name="sql">Parameterized SQL command to execute.</param>
+            <param name="args">SQL parameters passed to the SQL command.</param>
+            <returns>Returns the result as type T.</returns>
+        </member>
+        <member name="M:System.Data.FileDatabase.Transaction.ExecuteConvertScalarAsync``1(System.String,System.Object[])">
+            <summary>
+            Executes the query, and returns the first column of the first row in the result
+            set returned by the query. Additional columns or rows are ignored.
+            </summary>
+            <param name="sql">Parameterized SQL command to execute.</param>
+            <param name="args">SQL parameters passed to the SQL command.</param>
+            <returns>Converts the return type to a value of type T.</returns>
+        </member>
+        <member name="M:System.Data.FileDatabase.Transaction.ExecuteReaderAsync(System.String,System.Object[])">
+             <summary>
+            
+             </summary>
+             <param name="sql"></param>
+             <param name="args"></param>
+             <returns></returns>
+        </member>
+        <member name="M:System.Data.FileDatabase.Transaction.ExecuteDataSetAsync(System.String,System.Object[])">
+             <summary>
+            
+             </summary>
+             <param name="sql"></param>
+             <param name="args"></param>
+             <returns></returns>
+        </member>
+    </members>
+</doc>
